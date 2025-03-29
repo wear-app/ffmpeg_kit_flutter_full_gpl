@@ -637,7 +637,7 @@ public class FFmpegKitFlutterPlugin implements FlutterPlugin, ActivityAware, Met
     }
 
     @SuppressWarnings("deprecation")
-    protected void init(final BinaryMessenger messenger, final Context context, final Activity activity, final ActivityPluginBinding activityBinding) {
+    protected void init(@NonNull final BinaryMessenger messenger, @NonNull final Context context, @NonNull final Activity activity, @Nullable final ActivityPluginBinding activityBinding, @NonNull final ActivityPluginBinding newActivityBinding) {
         registerGlobalCallbacks();
 
         if (methodChannel == null) {
@@ -656,8 +656,9 @@ public class FFmpegKitFlutterPlugin implements FlutterPlugin, ActivityAware, Met
 
         this.context = context;
         this.activity = activity;
+        this.activityPluginBinding = newActivityBinding;
 
-        activityBinding.addActivityResultListener(this);
+        newActivityBinding.addActivityResultListener(this);
 
         Log.d(LIBRARY_NAME, String.format("FFmpegKitFlutterPlugin %s initialised with context %s and activity %s.", this, context, activity));
     }
